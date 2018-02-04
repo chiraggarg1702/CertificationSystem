@@ -1,0 +1,131 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is an api documentation for Certification System",
+    "version": "1.0",
+    "title": "Certification System",
+    "contact": {
+      "email": "chiraggarg1702@gmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "localhost:8080",
+  "basePath": "/certificationSystem/webapi/",
+  "tags": [
+    {
+      "name": "course",
+      "description": "Managing the courses"
+    },
+    {
+      "name": "user",
+      "description": "Everything about users"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/user": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Get user information",
+        "description": "This is get the details of the logged in user",
+        "operationId": "getAllUser",
+        "consumes": [
+          "text/plain"
+        ],
+        "produces": [
+          "text/plain"
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/addxUser": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Create User",
+        "description": "This is to create a user in the system",
+        "operationId": "addSingleUser",
+        "consumes": [
+          "text/plain"
+        ],
+        "produces": [
+          "text/plain"
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/updatexUser": {
+      "put": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Update user",
+        "description": "Updates the information of the logged in user",
+        "operationId": "updateSingleUser",
+        "consumes": [
+          "text/plain"
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/getxCourse": {
+      "post": {
+        "tags": [
+          "course"
+        ],
+        "summary": "Course details",
+        "description": "Returns the details of the course",
+        "operationId": "getCourseDetails",
+        "consumes": [
+          "text/plain"
+        ],
+        "produces": [
+          "text/plain"
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/applyxCourse": {
+      "put": {
+        "tags": [
+          "course"
+        ],
+        "summary": "Apply for a course",
+        "description": "Updates the user with the course applied",
+        "operationId": "applyForCourse",
+        "consumes": [
+          "text/plain"
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    }
+  }
+}
