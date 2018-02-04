@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>User Registration</title>
+		<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+		<script>
+		$( document ).ready(function() {
+	        console.log( "document loaded" );
+	    });
+			function submitForm(){
+				var xhttp = new XMLHttpRequest();
+				var ItemJSON = '{\n "fname" : ' + $('#fname').val() + ',\n "lname" : ' + $('#lname').val() + ',\n "email" : '+ $('#email').val() +',\n "passwd" : ' + $('#passwd').val() +',\n "contact" : ' + $('#contact').val()+'\n }'
+				console.log(ItemJSON);
+				// xhttp.onreadystatechange = callbackFunction(xhttp);
+    		xhttp.open("POST", "http://localhost:8080/certificationSystem/webapi/addxUser", true);
+    		xhttp.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
+    		//xhttp.setRequestHeader('Authorization', 'Basic ' + window.btoa('apiusername:apiuserpassword')); //in prod, you should encrypt user name and password and provide encrypted keys here instead 
+    		// xhttp.onreadystatechange = callbackFunction(xhttp);
+    		xhttp.send(ItemJSON);
+    //alert(xhttp.responseText);
+    //document.getElementById("div").innerHTML = xhttp.statusText + ":" + xhttp.status + "<BR><textarea rows='100' cols='100'>" + xhttp.responseText + "</textarea>";
+    			
+    			//xhttp.setRequestHeader("Content-type", "text/plain");
+    			//xhttp.send();
+    			//var response = JSON.parse(xhttp.responseText);
+    			console.log(xhttp.responseText);
+			}
+		</script>
+		
+	</head>
+	<body>
+		<div id="content">
+			<table>
+				<tr>
+					<td align="right">First Name:</td>
+					<td>
+						<input type="text" name="fname" class="fname" id="fname" value="">
+					</td>
+				</tr>
+
+				<tr>
+					<td align="right">Last Name:</td>
+					<td>
+						<input type="text" name="lname" id="lname" value="">
+					</td>
+				</tr>
+
+				<tr>
+					<td align="right">Contact #:</td>
+					<td>
+						<input type="text" name="contact" id="contact" value="">
+					</td>
+				</tr>
+
+				<tr>
+					<td align="right">Email Id:</td>
+					<td>
+						<input type="text" name="email" id="email" value="">
+					</td>
+				</tr>
+
+				<tr>
+					<td align="right">Password:</td>
+					<td>
+						<input type="Password" name="passwd" id="passwd" value="">
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						<button id="submit" onclick="submitForm()">Submit</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+
+		
+	</body>
+</html>

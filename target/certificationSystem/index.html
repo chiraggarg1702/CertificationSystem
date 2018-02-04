@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Index Page</title>
+		
+	</head>
+	<body>
+		<div id="content">
+			<table>
+				<tr>
+					<a href="UserRegistration.html">User Registration</a>
+					
+				</tr>
+				
+				<tr>
+					<a href="ProfileManagement.html">Manage Profile</a>
+					
+				</tr>
+				
+				<tr>
+					<a href="Courses.html">Course Mangement</a>
+					
+				</tr>
+
+				<!-- <tr>
+					<td align="right">Last Name:</td>
+					<td>
+						<input type="text" name="lname" id="lname" value="">
+					</td>
+				</tr>
+
+				<tr>
+					<td align="right">Contact #:</td>
+					<td>
+						<input type="text" name="contact" id="contact" value="">
+					</td>
+				</tr>
+
+				<tr>
+					<td align="right">Email Id:</td>
+					<td>
+						<input type="text" name="email" id="email" value="">
+					</td>
+				</tr>
+
+				<tr>
+					<td align="right">Password:</td>
+					<td>
+						<input type="Password" name="passwd" id="passwd" value="">
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						<button id="submit" onclick="submitForm()">Submit</button>
+					</td>
+				</tr> -->
+			</table>
+		</div>
+
+		<!-- <script type="text/javascript">
+			function submitForm(){
+				var xhttp = new XMLHttpRequest();
+				var ItemJSON = '{"fname" : "' + $('#fname').value + '","lname" : "' + $('#lname').value + '","email" : "'+ $('#email').value +'","passwd" : "' + ('#passwd').value +'","contact : "' + $('#contact').value+'"'}''
+				// xmlhttp.onreadystatechange = callbackFunction(xmlhttp);
+    		xhttp.open("POST", "https://localhost:8080/certificationSystem/addUser", true);
+    		xmlhttp.setRequestHeader("Content-Type", "text/plain");
+    		xmlhttp.setRequestHeader('Authorization', 'Basic ' + window.btoa('apiusername:apiuserpassword')); //in prod, you should encrypt user name and password and provide encrypted keys here instead 
+    		// xmlhttp.onreadystatechange = callbackFunction(xmlhttp);
+    		xmlhttp.send(ItemJSON);
+    alert(xmlhttp.responseText);
+    document.getElementById("div").innerHTML = xmlhttp.statusText + ":" + xmlhttp.status + "<BR><textarea rows='100' cols='100'>" + xmlhttp.responseText + "</textarea>";
+    			
+    			xhttp.setRequestHeader("Content-type", "application/json");
+    			xhttp.send();
+    			var response = JSON.parse(xhttp.responseText);
+			}
+		</script> -->
+	</body>
+</html>

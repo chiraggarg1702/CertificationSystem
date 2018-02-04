@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Profile Management</title>
+		<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+		<script>
+		var data;
+		$( document ).ready(function() {
+	        console.log( "document loaded" );
+	    });
+			function getData(){
+				var xhttp = new XMLHttpRequest();
+				var ItemJSON = $('#loginemail').val() + ", " + $('#loginpasswd').val();
+				
+				console.log(ItemJSON);
+				// xhttp.onreadystatechange = callbackFunction(xhttp);
+    		xhttp.open("POST", "http://localhost:8080/certificationSystem/webapi/user", true);
+    		xhttp.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
+    		//xhttp.setRequestHeader('Authorization', 'Basic ' + window.btoa('apiusername:apiuserpassword')); //in prod, you should encrypt user name and password and provide encrypted keys here instead 
+    		// xhttp.onreadystatechange = callbackFunction(xhttp);
+    		xhttp.send(ItemJSON);
+    //alert(xhttp.responseText);
+    //document.getElementById("div").innerHTML = xhttp.statusText + ":" + xhttp.status + "<BR><textarea rows='100' cols='100'>" + xhttp.responseText + "</textarea>";
+    			
+    			//xhttp.setRequestHeader("Content-type", "text/plain");
+    			//xhttp.send();
+    			//var response = JSON.parse(xhttp.responseText);
+    			
+    			xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+    	data = JSON.parse(this.responseText);
+    	//console.log(data.fname+", "+data.lname);
+
+    	$('#get_data').hide();
+    	$('#update_data').show();
+    	$('#fname').val(data.fname);
+    	$('#lname').val(data.lname);
+    	$('#email').val(data.email);
+    	$('#passwd').val(data.password);
+    	$('#contact').val(data.contact);
+    	$('#status').val(data.logicStatus);
+    	if(data.appliedCourse){
+    		$('#course').val(data.appliedCourse);
+    	}else{
+    		$('#course').val("Nil");
+    	}
+    	
+    }
+  };
+  
+    			
+			}
+
+function updateData(){
+				var xhttp = new XMLHttpRequest();
+				var ItemJSON = $('#email').val()+ "," + $('#fname').val() + "," + $('#lname').val() + "," + $('#passwd').val() +"," + $('#contact').val();
+				
+				console.log(ItemJSON);
+				// xhttp.onreadystatechange = callbackFunction(xhttp);
+    		xhttp.open("PUT", "http://localhost:8080/certificationSystem/webapi/updatexUser", true);
+    		xhttp.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
+    		//xhttp.setRequestHeader('Authorization', 'Basic ' + window.btoa('apiusername:apiuserpassword')); //in prod, you should encrypt user name and password and provide encrypted keys here instead 
+    		// xhttp.onreadystatechange = callbackFunction(xhttp);
+    		xhttp.send(ItemJSON);
+    //alert(xhttp.responseText);
+    //document.getElementById("div").innerHTML = xhttp.statusText + ":" + xhttp.status + "<BR><textarea rows='100' cols='100'>" + xhttp.responseText + "</textarea>";
+    			
+    			//xhttp.setRequestHeader("Content-type", "text/plain");
+    			//xhttp.send();
+    			//var response = JSON.parse(xhttp.responseText);
+    			
+    			$('#confirmation').show();
+    			
+}
+		</script>
+		
+	</head>
+	<body>
+		<div id="get_data">
+		<h2>Login Page</h2>
+			<table>
+				<tr>
+					<td align="right">Email Id:</td>
+					<td>
+						<input type="text" name="loginemail" id="loginemail" value="">
+					</td>
+				</tr>
+
+				<tr>
+					<td align="right">Password:</td>
+					<td>
+						<input type="Password" name="loginpasswd" id="loginpasswd" value="">
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						<button id="get" onclick="getData()">Get</button>
+					</td>
+				</tr>
+
+
+				</table>
+				</div>
+
+				<div id="update_data" style="display: none;">
+				<h2>Profile Page</h2>
+				<table>
+				
+				<tr>
+					<td align="right">First Name:</td>
+					<td>
+						<input type="text" name="fname" class="fname" id="fname" value="">
+					</td>
+				</tr>
+
+				<tr>
+					<td align="right">Last Name:</td>
+					<td>
+						<input type="text" name="lname" id="lname" value="">
+					</td>
+				</tr>
+
+				<tr>
+					<td align="right">Contact #:</td>
+					<td>
+						<input type="text" name="contact" id="contact" value="">
+					</td>
+				</tr>
+
+				<tr style="display: none;">
+					<td align="right" >Email Id:</td>
+					<td>
+						<input type="text" name="email" id="email" value="">
+					</td>
+				</tr>
+
+				<tr>
+					<td align="right">Password:</td>
+					<td>
+						<input type="Password" name="passwd" id="passwd" value="">
+					</td>
+				</tr>
+				
+				<tr>
+					<td align="right">Apply Status:</td>
+					<td>
+						<input type="text" name="status" id="status" value="" disabled="disabled"></input>
+					</td>
+				</tr>
+				
+				<tr>
+					<td align="right">Applied for:</td>
+					<td>
+						<input type="text" name="course" id="course" value="" disabled="disabled"></input>
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						<button id="submit" onclick="updateData()">Update</button>
+					</td>
+				</tr>
+				
+				<tr id="confirmation" style="display: none;">
+					<td>
+						<label>Data updated successfully</label>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div id="backToindex" align="center">
+			<a href="index.html">Back to Index Page</a>
+		</div>
+
+		
+	</body>
+</html>

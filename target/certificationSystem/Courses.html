@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Courses Management</title>
+		<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+		<script>
+		var data;
+		$( document ).ready(function() {
+	        console.log( "document loaded" );
+	    });
+			function applyCourse(){
+				var xhttp = new XMLHttpRequest();
+				var ItemJSON = $('#loginemail').val() + "," + $('#loginpasswd').val() + "," + $('#course').val();
+				
+				console.log(ItemJSON);
+				// xhttp.onreadystatechange = callbackFunction(xhttp);
+    		xhttp.open("PUT", "http://localhost:8080/certificationSystem/webapi/applyxCourse", true);
+    		xhttp.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
+    		//xhttp.setRequestHeader('Authorization', 'Basic ' + window.btoa('apiusername:apiuserpassword')); //in prod, you should encrypt user name and password and provide encrypted keys here instead 
+    		// xhttp.onreadystatechange = callbackFunction(xhttp);
+    		xhttp.send(ItemJSON);
+    //alert(xhttp.responseText);
+    //document.getElementById("div").innerHTML = xhttp.statusText + ":" + xhttp.status + "<BR><textarea rows='100' cols='100'>" + xhttp.responseText + "</textarea>";
+    			
+    			//xhttp.setRequestHeader("Content-type", "text/plain");
+    			//xhttp.send();
+    			//var response = JSON.parse(xhttp.responseText);
+    			
+    			xhttp.onreadystatechange = function() {
+    // if (this.readyState == 4 && this.status == 200) {
+    // 	data = JSON.parse(this.responseText);
+    // 	//console.log(data.fname+", "+data.lname);
+
+    // 	$('#get_data').hide();
+    // 	$('#update_data').show();
+    // 	$('#fname').val(data.fname);
+    // 	$('#lname').val(data.lname);
+    // 	$('#email').val(data.email);
+    // 	$('#passwd').val(data.password);
+    // 	$('#contact').val(data.contact);
+
+    $('#get_data').hide();
+    	$('#index').show();
+    // }
+  };
+  
+    			
+			}
+
+function getCourse(){
+				var xhttp = new XMLHttpRequest();
+				var ItemJSON = $('#course').val();
+				
+				console.log(ItemJSON);
+				// xhttp.onreadystatechange = callbackFunction(xhttp);
+    		xhttp.open("POST", "http://localhost:8080/certificationSystem/webapi/getxCourse", true);
+    		xhttp.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
+    		//xhttp.setRequestHeader('Authorization', 'Basic ' + window.btoa('apiusername:apiuserpassword')); //in prod, you should encrypt user name and password and provide encrypted keys here instead 
+    		// xhttp.onreadystatechange = callbackFunction(xhttp);
+    		xhttp.send(ItemJSON);
+    xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+    	data = JSON.parse(this.responseText);
+    	//console.log(data.fname+", "+data.lname);
+
+    	$('#manage_course').hide();
+    	$('#course_details').show();
+    	$('#details').val(data.details);
+    	
+    }
+  };
+    			
+    			
+    			
+}
+
+function previous(){
+	$('#manage_course').show();
+    	$('#course_details').hide();
+}
+
+function confirm(){
+	$('#get_data').show();
+    	$('#course_details').hide();
+}
+		</script>
+		
+	</head>
+	<body>
+	<div id="course_details" style="display: none;">
+		<h2>Course details</h2>
+		<textarea name="details" id="details"></textarea><br>
+		<table>
+			<tr>
+				<td>
+					<button name="back" id="back" onclick="previous()">Back</button>
+				</td>
+				<td>
+					<button name="confirm" id="confirm" onclick="confirm()">Confirm</button>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+
+
+
+	<div id="index" style="display: none;">
+		<label>Apply confirmed</label><br>
+		<a href="index.html">Index Page</a>
+	</div>
+
+
+
+
+		<div id="get_data" style="display: none;">
+		<h2>Login Page</h2>
+			<table>
+				<tr>
+					<td align="right">Email Id:</td>
+					<td>
+						<input type="text" name="loginemail" id="loginemail" value="">
+					</td>
+				</tr>
+
+				<tr>
+					<td align="right">Password:</td>
+					<td>
+						<input type="Password" name="loginpasswd" id="loginpasswd" value="">
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						<button id="get" onclick="applyCourse()">Apply</button>
+					</td>
+				</tr>
+
+
+				</table>
+				</div>
+
+				<div id="manage_course">
+				<h2>Manage Courses</h2>
+				<table>
+				<h3>Available Courses</h3>
+				<tr>
+					<input type="radio" name="course" id="course" value="1"> OCJP<br>
+					<input type="radio" name="course" id="course" value="2"> OCA<br>
+					<input type="radio" name="course" id="course" value="3"> OCP<br>
+				</tr>
+
+				<tr>
+					<td>
+						<button id="submit" onclick="getCourse()">Apply</button>
+					</td>
+				</tr>
+				
+				<tr id="confirmation" style="display: none;">
+					<td>
+						<label>Data updated successfully</label>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div id="backToindex" align="center">
+			<a href="index.html">Back to Index Page</a>
+		</div>
+
+		
+	</body>
+</html>
